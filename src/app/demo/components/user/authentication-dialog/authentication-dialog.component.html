@@ -1,0 +1,20 @@
+<p-dialog header="Authentication" [(visible)]="display" [modal]="true" [style]="{width: '500px'}">
+    <form [formGroup]="authForm">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="password">Password</label>
+          <input id="password" pPassword formControlName="password" toggleMask />
+        </div>
+        <div class="p-field">
+          <label for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" pPassword formControlName="confirmPassword" toggleMask />
+        </div>
+      </div>
+      <div class="p-text-success" *ngIf="passwordsMatch()">Passwords are matching</div>
+    </form>
+    <p-footer>
+      <button pButton type="button" label="Previous" (click)="onPrevious()"></button>
+      <button pButton type="button" label="Following" (click)="onNext()" class="p-button-success"></button>
+    </p-footer>
+  </p-dialog>
+  

@@ -1,0 +1,27 @@
+<p-dialog header="Personal Informations" [(visible)]="display" [modal]="true" [style]="{width: '500px'}">
+    <form [formGroup]="personalInfoForm">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="lastName">Last name</label>
+          <input id="lastName" pInputText formControlName="lastName" />
+        </div>
+        <div class="p-field">
+          <label for="firstName">First name</label>
+          <input id="firstName" pInputText formControlName="firstName" />
+        </div>
+        <div class="p-field">
+          <label for="email">Email</label>
+          <input id="email" pInputText formControlName="email" />
+        </div>
+        <div class="p-field">
+          <label for="roles">Roles</label>
+          <p-dropdown [options]="roles" formControlName="roles" optionLabel="label"></p-dropdown>
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <button pButton type="button" label="Cancel" (click)="onCancel()"></button>
+      <button pButton type="button" label="Following" (click)="onNext()" class="p-button-success"></button>
+    </p-footer>
+  </p-dialog>
+  

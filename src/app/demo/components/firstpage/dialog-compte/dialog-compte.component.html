@@ -1,0 +1,25 @@
+<p-dialog [header]="'Find your account'" [(visible)]="visible" [modal]="true" [closable]="true" [style]="{width: '50vw'}" (onHide)="cancel()">
+    <div class="p-d-flex p-jc-center p-ai-center flex-column">
+      <img src="assets/layout/images/zettaimg.jpg" alt="Pixi Eval Logo" class="company-logo " >
+      
+      <form class="p-fluid" (ngSubmit)="onSubmit()">
+        <div class="p-field">
+          <label for="identifier">Username</label>
+          <br>
+          
+
+          <div class="p-inputgroup">
+            <input id="identifier" type="email" pInputText [(ngModel)]="identifier" name="identifier" required>
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-check-circle" *ngIf="identifier"></i>
+            </span>
+          </div>
+        </div>
+        <br>
+        <br>
+        
+        <button type="submit" pButton label="Send an email" ></button>
+      </form>
+    </div>
+  </p-dialog>
+  

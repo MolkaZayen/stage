@@ -1,0 +1,17 @@
+<p-dialog header="Security and authorisation" [(visible)]="display" [modal]="true" [style]="{width: '500px'}">
+    <form [formGroup]="securityForm">
+      <div class="p-fluid">
+        <div class="p-field-radiobutton">
+          <p-radioButton name="access" value="allowed" formControlName="access" label="Allowed"></p-radioButton>
+        </div>
+        <div class="p-field-radiobutton">
+          <p-radioButton name="access" value="notAllowed" formControlName="access" label="Not allowed"></p-radioButton>
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <button pButton type="button" label="Previous" (click)="onPrevious()"></button>
+      <button pButton type="button" label="Add" (click)="onAdd()" class="p-button-success"></button>
+    </p-footer>
+  </p-dialog>
+  

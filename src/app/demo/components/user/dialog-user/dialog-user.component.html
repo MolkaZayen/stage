@@ -1,0 +1,109 @@
+<p-dialog [header]="header" [(visible)]="visible" [modal]="true" [closable]="true" [style]="{width: '50vw'}" (onHide)="cancel()">
+    <div *ngIf="isAddDialog || isModifyDialog || isConsultDialog" class="p-fluid formgrid grid custom-border">
+        <div style="height: 10px;"></div>
+
+        <br><br><br>
+       
+        <p-tabView #tabView>
+            <p-tabPanel header="Personnal Informations">
+                <div style="width: 100%; justify-content: space-between; flex-direction: row; display: flex; margin-top: 10px;">
+                    <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline">
+                        <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="lastname">Last name</label>
+                        <span style="width: 65%; max-width: 65%;">
+                            <input id="lastname" pInputText [(ngModel)]="currentCategory.Lastname" [disabled]="isConsultDialog" required>
+                        </span>
+                    </div>
+                </div> 
+                <div style="width: 100%; justify-content: space-between; flex-direction: row; display: flex; margin-top: 10px;">
+                    <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline">
+                        <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="firstname">First name</label>
+                        <span style="width: 65%; max-width: 65%;">
+                            <input id="firstname" pInputText [(ngModel)]="currentCategory.firstname" [disabled]="isConsultDialog" required>
+                        </span>
+                    </div>
+                </div> 
+                <div style="width: 100%; justify-content: space-between; flex-direction: row; display: flex; margin-top: 10px;">
+                    <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline">
+                        <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="email">Email</label>
+                        <span style="width: 65%; max-width: 65%;">
+                            <input id="email" pInputText [(ngModel)]="currentCategory.email" [disabled]="isConsultDialog" required>
+                        </span>
+                    </div>
+                </div> 
+                <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px;">
+                    <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="roles">Roles</label>
+                    <span style="width: 65%; max-width: 65%;">
+                        <p-dropdown id="roles" [(ngModel)]="currentCategory.roles" [options]="RolesOptions" [disabled]="isConsultDialog" required></p-dropdown>
+                    </span>
+                </div>
+                <div class="p-d-flex p-jc-end" style="margin-top: 20px;">
+                    <button pButton label="Following" icon="pi pi-arrow-right" (click)="goToNextTab(tabView, 1, 'personal')"></button>
+                    <button *ngIf="isConsultDialog" pButton label="Cancel" icon="pi pi-arrow-right" (click)="cancel()"></button>
+                </div>        
+            </p-tabPanel>
+
+            <p-tabPanel header="Authentication">
+                <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline;margin-top: 10px;">
+                    <form (ngSubmit)="change()">
+                        <div class="p-field">
+                            <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="newpassword">Password</label>
+                            <input pInputText type="password" id="newpassword" [(ngModel)]="newpassword" name="newpassword" required>
+                        </div>         
+                        <div class="p-field">
+                            <label style="width: 30%; max-width: 30%; font-size: 12px; font-weight: 900;" for="password">Confirm password</label>
+                            <input pInputText type="password" id="password" [(ngModel)]="password" name="password" required>
+                        </div>
+                        <div *ngIf="errorMessage" class="p-error">{{ errorMessage }}</div>
+                    </form>
+                </div>
+                <div class="p-d-flex p-jc-end" style="margin-top: 20px;">
+                    <button pButton label="Previous" icon="pi pi-arrow-left" (click)="tabView.activeIndex = 0"></button>
+                    <button pButton label="Following" icon="pi pi-arrow-right" (click)="goToNextTab(tabView, 2, 'authentication')"></button>
+                </div>     
+            </p-tabPanel>
+
+            <p-tabPanel header="Security and Authorisation">
+                <div style="width: 45%; max-width: 45%; display: flex; justify-content: space-between; align-items: baseline;margin-top: 10px;">
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex align-items-center">
+                            <p-radioButton 
+                                name="securityandauthorisation" 
+                                value="allowed" 
+                                [(ngModel)]="access" 
+                                inputId="option1" />
+                            <label for="option1" class="ml-2">
+                                Allowed
+                            </label>
+                        </div> 
+                        <div class="flex align-items-center">
+                            <p-radioButton 
+                                name="securityandauthorisation" 
+                                value="notallowed" 
+                                [(ngModel)]="access" 
+                                inputId="option2" />
+                            <label for="option2" class="ml-2">
+                                Not allowed
+                            </label>
+                        </div>
+                    </div> 
+                </div>
+                <div class="p-d-flex p-jc-end" style="margin-top: 20px;">
+                    <button pButton label="Previous" icon="pi pi-arrow-left" (click)="tabView.activeIndex = 1" ></button>
+                    <button *ngIf="isAddDialog || isModifyDialog" pButton label="Add" icon="pi pi-check" class="p-button-success" (click)="save() "></button>
+                </div>    
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+
+    <div *ngIf="isDeleteDialog" class="p-fluid form" style="font-size: 13px; font-weight: 600;">
+        Voulez-vous supprimer le User N°{{selectedUser.codeUser}}?
+    </div>
+
+    <p-footer>
+        <div class="p-d-flex p-jc-end">
+            <button *ngIf="isConsultDialog" pButton label="Fermer" icon="pi pi-times" class="p-button-secondary" (click)="cancel()"></button>
+            <button *ngIf="isDeleteDialog" pButton icon="pi pi-check" label="Confirmer" (click)="confirmDelete()" class="p-button-success"></button>
+            <button *ngIf="isDeleteDialog" pButton icon="pi pi-times" label="Annuler" (click)="cancel()" class="p-button-danger"></button>
+        </div>
+    </p-footer>
+</p-dialog>

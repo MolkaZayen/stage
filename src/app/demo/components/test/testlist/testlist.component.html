@@ -1,0 +1,41 @@
+<p-toolbar styleClass="custom-toolbar">
+    <ng-template pTemplate="left">
+        <button pButton type="button" label="Add" icon="pi pi-plus" (click)="openDialog('add')" class="p-button-success custom-button"></button>
+        <button pButton type="button" label="Consult" icon="pi pi-search" (click)="openDialog('consult')" [disabled]="!selectedTest" class="p-button-info custom-button"></button>
+        <button pButton type="button" label="Modify" icon="pi pi-pencil" (click)="openDialog('modify')" [disabled]="!selectedTest" class="p-button-warning custom-button"></button>
+        <button pButton type="button" label="Delete" icon="pi pi-trash" (click)="openDialog('delete')" [disabled]="!selectedTest" class="p-button-danger custom-button"></button>
+    </ng-template>
+</p-toolbar>
+
+<p-table [value]="test" [(selection)]="selectedTest" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="test">Created by
+                
+            </th>
+            <th pSortableColumn="id">Category name
+                
+            </th>
+            <th pSortableColumn="email">Creation date
+                
+            </th>
+            <th pSortableColumn="roles">Actions
+                
+            </th>
+           
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-test>
+        <tr [pSelectableRow]="test">
+            <td>{{test.createdby}}</td>
+            <td>{{test.categoryname}}</td>
+            <td>{{test.creationdate}}</td>
+            <td>{{test.actions}}</td>
+
+
+        </tr>
+    </ng-template>
+</p-table>
+<app-test-dialog [dialogType]="currentDialogType" [selectedTest]="selectedTest" [(visible)]="isDialogVisible" (onAdd)="handleAdd($event)" (onModify)="handleModify($event)" (onDelete)="handleDelete($event)">
+</app-test-dialog >
+

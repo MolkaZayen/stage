@@ -1,0 +1,46 @@
+.company-logo {
+    width: 500px; /* Ajustez la largeur selon vos besoins */
+    height: auto; /* Conserve les proportions de l'image */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur de son conteneur */
+    margin: 0 auto; /* Centrer l'image si elle a une largeur définie */
+    display: block;
+}
+  
+  
+  h2 {
+    font-size: 20px;
+    color: #666;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  input {
+    
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+ button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff7b00;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #343637;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
